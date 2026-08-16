@@ -151,18 +151,69 @@ h2 { margin-bottom: 0; font-size: clamp(1rem, 1.4vw, 1.25rem); line-height: 1.35
 
 .hint { margin: 0; color: var(--muted); font-size: 0.75rem; }
 
+.flow-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.zoom-controls {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--white);
+}
+
+.zoom-button,
+.zoom-value {
+  min-width: 34px;
+  height: 34px;
+  padding: 0 9px;
+  border: 0;
+  color: var(--ink);
+  background: transparent;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.zoom-value {
+  min-width: 58px;
+  border-inline: 1px solid var(--line);
+  color: var(--orange-dark);
+  font-size: 0.72rem;
+}
+
+.zoom-button:hover,
+.zoom-value:hover,
+.zoom-button:focus-visible,
+.zoom-value:focus-visible {
+  color: var(--orange-dark);
+  background: var(--orange-soft);
+  outline: none;
+}
+
+.zoom-button:disabled { color: #bbb3ab; background: #f7f3ef; cursor: not-allowed; }
+
 .flowchart-stage {
+  flex: 1;
+  min-height: 0;
   width: 100%;
   overflow: auto;
   background: #faf7f3;
 }
 
+.flowchart-stage:focus-visible { outline: 3px solid rgba(235, 110, 13, 0.25); outline-offset: -3px; }
+
 .flowchart-canvas {
+  --flow-zoom: 1;
   position: relative;
-  width: 100%;
+  width: calc(100% * var(--flow-zoom));
 }
 
-.flowchart-canvas.is-mermaid { min-width: 1600px; }
+.flowchart-canvas.is-mermaid { min-width: calc(1600px * var(--flow-zoom)); }
 
 .flowchart-canvas > img {
   display: block;
@@ -366,6 +417,8 @@ h2 { margin-bottom: 0; font-size: clamp(1rem, 1.4vw, 1.25rem); line-height: 1.35
   .scene-nav { padding-inline: 12px; }
   .panel-heading { min-height: 70px; padding: 15px 16px; }
   .hint { display: none; }
+  .flow-heading-actions { gap: 0; }
+  .zoom-button, .zoom-value { height: 32px; }
   .preview-content { padding: 14px; }
 }
 
