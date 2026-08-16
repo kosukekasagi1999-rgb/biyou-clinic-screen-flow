@@ -2,7 +2,7 @@
 
 ## 1. このツールの目的
 
-「美容クリニック求人.com」の画面遷移図と、各ページのデザイン画像を並べて確認するための静的Webページです。上部で5つの画面シーンを切り替え、左側のページ枠をクリックすると右側のプレビューが切り替わります。1つのページに複数のデザイン画像を登録できます。
+「美容クリニック求人.com」の画面遷移図と、各ページのデザイン画像を並べて確認するための静的Webページです。上部で5つの画面シーンを切り替え、左側のページ枠をクリックすると右側のプレビューが切り替わります。1つのページに複数のデザイン画像を登録できます。1つ目の全体画面遷移図はMermaid定義から表示します。
 
 HTML・CSS・JavaScriptだけで作られているため、特別な開発環境は必要ありません。
 
@@ -95,11 +95,11 @@ js/
 index.html            最初に開くファイル
 ```
 
-画面シーンは `config/screens.js` の `flows` で管理します。現在は5シーン分の枠があり、2〜5番目は遷移図を追加すると使える準備状態です。`assets/flowcharts/` にREADME記載の予定ファイル名で画像を置き、各シーンの `screens` にクリック領域を追加してください。
+画面シーンは `config/screens.js` の `flows` で管理します。現在は5シーン分の枠があり、2〜5番目は遷移図を追加すると使える準備状態です。1つ目はMermaidのノードIDと各画面の `nodeId` が自動的にクリック領域として接続されます。画像形式の遷移図では `assets/flowcharts/` に画像を置き、各シーンの `screens` にクリック領域を追加してください。
 
 | 画面シーン | 遷移図の予定ファイル |
 | --- | --- |
-| TOP → インタビュー | `assets/flowcharts/top-interview.png` |
+| 全体画面遷移 | `config/screens.js` 内のMermaid定義 |
 | TOP → 求人検索 | `assets/flowcharts/top-job-search.png` |
 | TOP → 口コミ | `assets/flowcharts/top-reviews.png` |
 | TOP → マイページ | `assets/flowcharts/top-mypage.png` |

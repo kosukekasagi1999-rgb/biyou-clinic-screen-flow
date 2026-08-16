@@ -162,10 +162,38 @@ h2 { margin-bottom: 0; font-size: clamp(1rem, 1.4vw, 1.25rem); line-height: 1.35
   width: 100%;
 }
 
+.flowchart-canvas.is-mermaid { min-width: 1600px; }
+
 .flowchart-canvas > img {
   display: block;
   width: 100%;
   height: auto;
+}
+
+.flowchart-canvas > img[hidden] { display: none; }
+
+.mermaid-chart {
+  width: 100%;
+  padding: 20px;
+  background: #ffffff;
+}
+
+.mermaid-chart[hidden] { display: none; }
+
+.mermaid-chart svg {
+  display: block;
+  width: 100% !important;
+  max-width: none !important;
+  height: auto !important;
+  margin: 0 auto;
+}
+
+.diagram-loading {
+  display: grid;
+  min-height: 420px;
+  place-items: center;
+  color: var(--muted);
+  font-size: 0.84rem;
 }
 
 .flowchart-empty {
