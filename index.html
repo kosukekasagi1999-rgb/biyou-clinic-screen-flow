@@ -30,10 +30,17 @@
             <p class="eyebrow">SCREEN FLOW</p>
             <h2 id="flow-title">画面シーン</h2>
           </div>
-          <p class="hint">オレンジ色の画面をクリック</p>
+          <div class="flow-heading-actions">
+            <p class="hint">オレンジ色の画面をクリック</p>
+            <div class="zoom-controls" role="group" aria-label="画面遷移図の拡大縮小">
+              <button id="zoom-out" class="zoom-button" type="button" aria-label="縮小" title="縮小">−</button>
+              <button id="zoom-reset" class="zoom-value" type="button" aria-label="100%に戻す" title="100%に戻す">100%</button>
+              <button id="zoom-in" class="zoom-button" type="button" aria-label="拡大" title="拡大">＋</button>
+            </div>
+          </div>
         </div>
 
-        <div id="flowchart-stage" class="flowchart-stage">
+        <div id="flowchart-stage" class="flowchart-stage" tabindex="0" aria-label="拡大縮小できる画面遷移図">
           <div class="flowchart-canvas">
             <img id="flowchart-image" alt="TOPからインタビュー記事詳細までの画面遷移図" />
             <div id="flowchart-mermaid" class="mermaid-chart" hidden></div>
