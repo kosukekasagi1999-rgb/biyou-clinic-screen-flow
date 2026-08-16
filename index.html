@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="美容クリニック求人.comの画面遷移図と画面デザインを確認するビューアー" />
+    <title>画面遷移図ビューアー｜美容クリニック求人.com</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <p class="brand">美容クリニック求人.com</p>
+        <h1>画面遷移図ビューアー</h1>
+      </div>
+      <label class="debug-toggle">
+        <input id="debug-toggle" type="checkbox" />
+        <span>クリック領域を表示</span>
+      </label>
+    </header>
+
+    <nav class="scene-nav" aria-label="画面シーン選択">
+      <div id="scene-tabs" class="scene-tabs"></div>
+    </nav>
+
+    <main class="viewer">
+      <section class="panel flow-panel" aria-labelledby="flow-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">SCREEN FLOW</p>
+            <h2 id="flow-title">画面シーン</h2>
+          </div>
+          <p class="hint">オレンジ色の画面をクリック</p>
+        </div>
+
+        <div id="flowchart-stage" class="flowchart-stage">
+          <div class="flowchart-canvas">
+            <img id="flowchart-image" alt="TOPからインタビュー記事詳細までの画面遷移図" />
+            <div id="hotspot-layer" class="hotspot-layer" aria-label="画面選択"></div>
+          </div>
+          <div id="flowchart-empty" class="flowchart-empty" hidden></div>
+        </div>
+      </section>
+
+      <section class="panel preview-panel" aria-labelledby="preview-title">
+        <div class="panel-heading preview-heading">
+          <div>
+            <p class="eyebrow">SCREEN PREVIEW</p>
+            <h2 id="preview-title">画面プレビュー</h2>
+          </div>
+          <span id="screen-number" class="screen-number" aria-hidden="true">—</span>
+        </div>
+
+        <div id="preview-content" class="preview-content" aria-live="polite">
+          <div class="empty-state">
+            <span class="empty-icon" aria-hidden="true">＋</span>
+            <p>画面遷移図から確認したいページをクリックしてください。</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./config/screens.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
+
