@@ -7,15 +7,23 @@
   const flowchartImage = document.getElementById("flowchart-image");
   const mermaidChart = document.getElementById("flowchart-mermaid");
   const flowchartCanvas = document.querySelector(".flowchart-canvas");
+  const flowchartStage = document.getElementById("flowchart-stage");
   const flowchartEmpty = document.getElementById("flowchart-empty");
   const hotspotLayer = document.getElementById("hotspot-layer");
   const previewTitle = document.getElementById("preview-title");
   const previewContent = document.getElementById("preview-content");
   const screenNumber = document.getElementById("screen-number");
   const debugToggle = document.getElementById("debug-toggle");
+  const zoomOutButton = document.getElementById("zoom-out");
+  const zoomResetButton = document.getElementById("zoom-reset");
+  const zoomInButton = document.getElementById("zoom-in");
   let activeFlowId = "";
   let mermaidPromise;
   let renderSequence = 0;
+  let zoomLevel = 1;
+  const zoomMin = 0.5;
+  const zoomMax = 2;
+  const zoomStep = 0.25;
 
   if (!config || !Array.isArray(config.flows) || config.flows.length === 0) {
     previewContent.textContent = "設定ファイルを読み込めませんでした。";
@@ -36,7 +44,40 @@
     hotspotLayer.classList.toggle("show-hotspots", debugToggle.checked);
   });
 
+  zoomOutButton.addEventListener("click", function () { setZoom(zoomLevel - zoomStep); });
+  zoomResetButton.addEventListener("click", function () { setZoom(1); });
+  zoomInButton.addEventListener("click", function () { setZoom(zoomLevel + zoomStep); });
+
+  flowchartStage.addEventListener("keydown", function (event) {
+    if (event.key === "+" || event.key === "=") {
+      event.preventDefault();
+      setZoom(zoomLevel + zoomStep);
+    } else if (event.key === "-" || event.key === "_") {
+      event.preventDefault();
+      setZoom(zoomLevel - zoomStep);
+    } else if (event.key === "0") {
+      event.preventDefault();
+      setZoom(1);
+    }
+  });
+
+  flowchartStage.addEventListener("wheel", function (event) {
+    if (!event.ctrlKey) return;
+    event.preventDefault();
+    setZoom(zoomLevel + (event.deltaY < 0 ? zoomStep : -zoomStep));
+  }, { passive: false });
+
+  setZoom(1);
   showFlow(config.flows[0], sceneTabs.firstElementChild);
+
+  function setZoom(value) {
+    zoomLevel = Math.min(zoomMax, Math.max(zoomMin, Math.round(value / zoomStep) * zoomStep));
+    flowchartCanvas.style.setProperty("--flow-zoom", zoomLevel);
+    zoomResetButton.textContent = Math.round(zoomLevel * 100) + "%";
+    zoomResetButton.setAttribute("aria-label", "現在" + Math.round(zoomLevel * 100) + "%、100%に戻す");
+    zoomOutButton.disabled = zoomLevel <= zoomMin;
+    zoomInButton.disabled = zoomLevel >= zoomMax;
+  }
 
   function showFlow(flow, tab) {
     activeFlowId = flow.id;
